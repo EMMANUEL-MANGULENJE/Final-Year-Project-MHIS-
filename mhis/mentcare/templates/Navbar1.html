@@ -1,0 +1,180 @@
+ {% extends 'base.html' %}
+ 
+    {% block content %}
+
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #F5F5F5;
+}
+
+.topnav a {
+  float: left;
+  color: #black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+
+.topnav a.active {
+  
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+;
+}
+
+
+.navbar-nav li {
+  
+
+  
+ 
+  padding-left: 25px;
+  font-size: 15px;
+;
+}
+
+.topnav-right {
+  float: right;
+  padding-right: 200px;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Top navigation -->
+<div class="topnav" >
+
+  <!-- Centered link -->
+  <div class="topnav-centered">
+    <a href="#home" >Mental Health Information System</a>
+  </div>
+  
+  
+  <!-- Right-aligned links -->
+  <div class="topnav-right">
+    <a href="#search"><i class="fa fa-envelope"></i>Mail</a>
+    <a href="#about"><i class="fa fa-calendar" aria-hidden="true"></i>Calendar</a>
+     <a href="#about"><i class="fa fa-question-circle" aria-hidden="true"></i>Support</a>
+  </div>
+  
+</div>
+
+<div class = "nav2">
+<nav class="navbar navbar-expand-lg navbar-dark  nav-justified" style="background-color: #0B6595; width: 100%; ">
+       <!-- <a class='navbar-brand' href='#'>Mental Health Information System</a> -->
+       <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#menu'>
+           <span class="navabar-toggler-icon"></span>
+       </button>
+        <div class="navbar collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+                <li class="navbar-item active"><a class='nav-link' href="{% url 'home' %}"><i class='fas fa-home'></i>Home</a></li>
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+                <li class="navbar-item active"><a class='nav-link' href="{% url 'ward' %}"></i>Wards</a></li>
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+                <li class="navbar-item dropdown active"><a class='nav-link dropdown-toggle' data-toggle="dropdown" href="#">Patients</a>
+                    <div class='dropdown-menu'>
+                        <a class='dropdown-item' href="{% url 'patientDetail' %}">View patient</a>
+                        <a class='dropdown-item' href="{% url 'PatientAdd' %}"> Add Patient</a>
+                    </div>
+
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+
+
+                </li>
+                <li class="navbar-item dropdown active"><a class='nav-link dropdown-toggle' data-toggle="dropdown" href="#">Appointment</a>
+                    <div class='dropdown-menu'>
+                        <a class='dropdown-item' href="{% url 'appointmentDetails' %}">View Appointments</a>
+                        <a class='dropdown-item' href="{% url 'MakeAppointment' %}">Make Appointments</a>
+                    </div>
+                </li>
+
+
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+
+                 </li>
+                <li class="navbar-item dropdown active"><a class='nav-link dropdown-toggle' data-toggle="dropdown" href="#">Reports</a>
+                    <div class='dropdown-menu'>
+                        <a class='dropdown-item' href="{% url 'Reports' %}">View Reports</a>
+                        <a class='dropdown-item' href="{% url 'NurseNotes' %}">Nurse Report</a>
+                        <a class='dropdown-item' href="{% url 'DoctorNotes' %}">Doctor Report</a>
+                    </div>
+                </li>
+
+
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+
+
+                <li class="navbar-item active"><a class='nav-link ' href="{% url 'Diagnosis' %}">Diagnosis</a>
+                    <div class='dropdown-menu'> 
+                    </div>
+                </li>
+
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+
+                <li class="navbar-item dropdown active"><a class='nav-link dropdown-toggle' data-toggle="dropdown" href="#">Discharge</a>
+                    <div class='dropdown-menu'>
+                        <a class='dropdown-item' href="{% url 'Discharge' %}">Discharge Patient</a>
+                        <a class='dropdown-item' href="{% url 'dischargeDetails' %}">View Discharged Patients</a>
+                    </div>
+                </li>
+
+                <li class="navbar-item active"><a class='nav-link' href="#"></a></li>
+  
+               
+                 <li class="navbar-item active"><a class='nav-link' href="{% url 'logout' %}"><i class="fa fa-fw fa-user"></i>Logout</a></li>
+             {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-fw fa-user"></i>Login</a>
+            </li>
+            </ul>
+            {% endif %} 
+               </div>  
+    </nav>
+    </div>
+    <div class Nav>
+    <br/>
+
+    {% block Navcontent %}
+    {% endblock %}
+    </div>
+    
+    {% endblock %}

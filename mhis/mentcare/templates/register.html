@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    {% load crispy_forms_tags%}
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+    <form method="POST">
+        {%csrf_token %}
+        <br>
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-2">ACCOUNT REGISTRATION</legend>
+            {{form|crispy}}
+        
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit"> ADD USER</button>
+        </div>
+        </form>
+        </fieldset>
+    </body>
+</html>

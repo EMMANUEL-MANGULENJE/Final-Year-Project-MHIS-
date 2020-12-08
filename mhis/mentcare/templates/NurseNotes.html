@@ -1,0 +1,22 @@
+{% extends 'Navbar1.html' %}
+  {% block Navcontent %}
+    {% load crispy_forms_tags%}
+
+    <br/>
+    <br/>
+    <br/>
+   <div class = 'container'>
+    <div class = 'col-sm-6'>
+      <div class = 'panel panel-default'>
+        <div class = 'panel-heading'></div>
+          <div class = 'panel-body'>
+            <form method = 'POST' action = ''>
+              {% csrf_token%}
+              {{form|crispy}}
+              <input type = "submit" value= 'save'/>
+            </form>
+        </div>
+      </div>
+    </div>
+   </div>
+  {% endblock %}
