@@ -47,3 +47,9 @@ admin.site.register( PsychiatricDiagnosis)
 admin.site.register( MedicalDiagnosis) 
 admin.site.register(Prescriptions)
 admin.site.register(Report)
+
+
+#Admin page customizaation
+admin.site.site_header = "Welcome to Mental Health Information System Admin Portal"
+admin.site.site_title = "Welcome to Mental Health info System"
+admin.site.index_title = "Mental Health Information System Adminstrator"

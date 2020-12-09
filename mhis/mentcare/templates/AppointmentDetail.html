@@ -36,7 +36,6 @@
     <table class="table table-hover" id="patient">
         <thead>
             <tr>
-                <th>Patient ID</th>
                 <th>Name </th>
                 <th>Checked by</th>
                 <th>Review date</th>
@@ -54,7 +53,6 @@
         <tbody>
             {% for a in appointments %}
             <tr>
-                <td>{{a.id}}</td>
                 <td>{{a.patient_name}}</td>
                 <td>{{a.checked_by}}</td>
                 <td>{{a.updated_at}}</td>

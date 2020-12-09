@@ -19,10 +19,6 @@ from mentcare.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
-#Admin page customizaation
-admin.site.site_header = "Welcome to Mental Health Information System Admin Portal"
-admin.site.site_title = "Welcome to Mental Health info System"
-admin.site.index_title = "Mental Health Information System Adminstrator"
 
 #url patterns
 urlpatterns = [

@@ -1,8 +1,9 @@
 from django.db import models
+from datetime import datetime, date
 
 # Create your models here.
 
-
+#Employee table
 class Employee(models.Model):
     first_name = models.CharField(max_length=20)
     surname = models.CharField(max_length=20)
@@ -14,6 +15,8 @@ class Employee(models.Model):
         return self.first_name + " " + self.surname
 
 
+
+#disstrict htable
 class Districts(models.Model):
     home_district = models.CharField(max_length=50)
 
@@ -22,6 +25,7 @@ class Districts(models.Model):
 
 
 
+#education table
 class Education(models.Model):
     Education_level = models.CharField(max_length=50)
 
@@ -29,7 +33,7 @@ class Education(models.Model):
         return self.Education_level
 
 
-
+#tribe table
 class Tribe(models.Model):
     tribe = models.CharField(max_length=50)
 
@@ -37,7 +41,7 @@ class Tribe(models.Model):
         return self.tribe
 
 
-
+#marural satus table
 class Marital(models.Model):
     marital_status = models.CharField(max_length=50)
 
@@ -45,13 +49,7 @@ class Marital(models.Model):
         return self.marital_status
 
 
-class Marital(models.Model):
-    marital_status = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.marital_status
-
-
+#religion table
 class Religion(models.Model):
     religion = models.CharField(max_length=50)
 
@@ -79,11 +77,11 @@ class Patient(models.Model):
     # hospital_OPD_number = models.IntegerField()
     first_name = models.CharField(max_length=25)
     surname = models.CharField(max_length=25)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(auto_now_add=False, auto_now = False, blank=True)
     nationality = models.CharField(max_length=20)
     home_village = models.CharField(max_length=20)
     home_TA = models.CharField(max_length=20)
-    phone_number = models.IntegerField()
+    phone_number = models.IntegerField(null = True)
     name_of_next_of_kin = models.CharField(max_length=30)
     phone_of_guardian = models.IntegerField()
     employment =  models.ForeignKey(Employement, on_delete=models.CASCADE)

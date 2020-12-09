@@ -4,7 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import views as auth_views
 from .models import *
 
- 
+class DateInput(forms.DateInput):
+    input_type = "date"
+
 
 #registration form
 class UserRegForm(UserCreationForm):

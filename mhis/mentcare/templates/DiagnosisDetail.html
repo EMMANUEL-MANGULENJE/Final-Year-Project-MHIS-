@@ -36,7 +36,6 @@
     <table class="table table-hover" id="patient">
         <thead>
             <tr>
-                <th>Diagnosis ID</th>
                 <th>Name </th>
                 <th>psychiatric</th>
                 <th>medical</th>
@@ -50,7 +49,6 @@
         <tbody>
             {% for a in diagnosis %}
             <tr>
-                <td>{{a.id}}</td>
                 <td>{{a.patient_name}}</td>
                 <td>{{a.psychiatric}}</td>
                 <td>{{a.medical}}</td>

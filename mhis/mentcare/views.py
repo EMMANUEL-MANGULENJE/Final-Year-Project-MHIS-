@@ -34,6 +34,7 @@ def NurseNotes(request):
 
  
 #function to get all nurses notes
+@login_required
 def NurseDetail(request):
     nurses = NurseNote.objects.all()
     context = {'nurses': nurses}
@@ -47,6 +48,7 @@ def DeleteNnotes(request, pid):
     return redirect('nurseDetails')
 
 #notes updating function
+@login_required
 def NnotesUpdate(request, pk):
     note = NurseNote.objects.get(id=pk) 
     form = NurseNotesForm(instance = note)
@@ -78,6 +80,7 @@ def DoctorNotes(request):
     }
     return render(request, 'DoctorNotes.html', context)
 
+@login_required
 def DoctorDetail(request):
     doctors = DoctorNote.objects.all()
     context = {'doctors': doctors}
@@ -92,6 +95,7 @@ def DeleteDnotes(request, pid):
 
 
 #patient updating function
+@login_required
 def DNotesUpdate(request, pk):
     notes = DoctorNote.objects.get(id=pk) 
     form = DoctorNotesForm(instance = notes)
@@ -125,6 +129,7 @@ def PatientAdd(request):
 
 
 #function to get all patient details from the database
+@login_required
 def patientDetail(request):
     patients = Patient.objects.all()
     context = {'patients': patients}
@@ -140,6 +145,7 @@ def DeletePatient(request, pid):
 
 
 #patient updating function
+@login_required
 def PatientUpdate(request, pk):
     patient = Patient.objects.get(id=pk) 
     form = PatientAddForm(instance = patient)
@@ -169,6 +175,7 @@ def Discharge(request):
     }
     return render(request, 'Discharge.html',{'form':form})
 
+@login_required
 def DischargeDetail(request):
     discharge = Exit.objects.all()
     context = {'discharge': discharge,
@@ -183,6 +190,7 @@ def DeleteDischarge(request, pid):
     return redirect('dischargeDetails')
 
 
+@login_required
 def DischargeUpdate(request, pk):
     discharge = Exit.objects.get(id=pk)
     form = DischargeForm(instance=discharge)
@@ -215,7 +223,7 @@ def MakeAppointment(request):
     }
     return render(request, 'MakeAppointment.html',{'form':form})
 
-
+@login_required
 def AppointmentDetail(request):
     appointments = Appointment.objects.all()
     context = {'appointments':  appointments}
@@ -228,6 +236,7 @@ def DeleteAppointment(request, pid):
     messages.success(request, f'Appointment successfully deleted')
     return redirect('appointmentDetails')
 
+@login_required
 def AppointmentUpdate(request, pk):
     appointments = Appointment.objects.get(id=pk)
     form = AppointmentForm(instance=appointments)
@@ -273,6 +282,7 @@ def Diagnosis(request):
     return render(request, 'Diagnosis.html', {'form': form})
 
 
+@login_required
 def DiagnosisDetail(request):
     diagnosis = Diagnoses.objects.all()
     context = {'diagnosis':  diagnosis}
@@ -285,6 +295,7 @@ def DeleteDiagnosis(request, pid):
     diagnosis.delete()
     return redirect('diagnosisDetails')
 
+@login_required
 def DiagnosisUpdate(request, pk):
     diagnosis = Diagnoses.objects.get(id=pk)
     form = DiagnosisForm(instance=diagnosis)
@@ -316,7 +327,7 @@ def MedicalPsychiatricHistory(request):
     }
     return render(request, 'MedicalPsychiatricHistory.html',{'form':form})
 
-
+@login_required
 def HistoryDetail(request):
     history = MedicalPsychiatricHistorys.objects.all()
     context = {'history': history}
@@ -339,6 +350,7 @@ def Prescription(request):
 
 
 #function to get all prescriptions in the database
+@login_required
 def prescriptionDetails(request):
     pre = Prescriptions.objects.all()
     context = {'pre': pre}
@@ -351,6 +363,7 @@ def DeletePrescription(request, pid):
     prescription.delete()
     return redirect('prescriptionDetails')
 
+@login_required
 def PrescriptionUpdate(request, pk):
     prescription = Prescriptions.objects.get(id=pk)
     form = PrescriptionForm(instance=prescription)
@@ -381,6 +394,7 @@ def register(request):
 
 
 #user login form
+@login_required
 def login(request):
     loginform = UserReg()
     return render(request, 'login.html',{'form':loginform})
@@ -404,6 +418,7 @@ def Reports(request):
     }
     return render(request, 'Reports.html', context)
 
+@login_required
 def Rdetail(request):
     generalreport = Report.objects.all()
     context = {'generalreport': generalreport}
@@ -414,27 +429,33 @@ def Rdetail(request):
 """wards functions, ward = male acute ward, MRward = Male Rehabilitation ward
 FAward = Female Acute award, FRward = Female rrehabilitation ward
 Pward = Paying ward"""
+@login_required
 def ward(request):
     patientward = Male_Acute_Ward.objects.all()
     context = {'patientward': patientward}
     return render(request, 'Wards.html', context)
 
+@login_required
 def MRward(request):
     maleward = Male_Rehabilitation_Ward.objects.all()
     context = {'maleward': maleward}
     return render(request, 'MRward.html', context)
 
+@login_required
 def FRward(request):
     femaleward = Female_Rehabilitation_Ward.objects.all()
     context = {'femaleward': femaleward}
     return render(request, 'FRward.html', context)
 
+@login_required
 def FAward(request):
     femaleAward = Female_Acute_Ward.objects.all()
     context = {'femaleAward': femaleAward}
     return render(request, 'FAward.html', context)
 
+@login_required
 def Pward(request):
     payward = Paying_Ward.objects.all()
+    count =  Paying_Ward.objects.count()
     context = {'payward': payward}
-    return render(request, 'Pward.html', context)
+    return render(request, 'Pward.html', {"payward":payward, "count": count})
