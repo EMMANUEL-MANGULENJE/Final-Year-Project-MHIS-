@@ -1,0 +1,23 @@
+{% extends 'Navbar1.html' %}
+  {% block Navcontent %}
+    {% load crispy_forms_tags%}
+<br/>
+<h1 class="text-center">Nurses Notes</h1>
+<br/>
+<br/>
+
+   <div class = 'container'>
+    <div class = 'col-sm-10'>
+      <div class = 'panel panel-default'>
+        <div class = 'panel-heading'></div>
+          <div class = 'panel-body'>
+            <form method = 'POST' action = ''>
+              {% csrf_token%}
+              {{form|crispy}}
+              <input type = "submit" class="btn btn-primary" value= 'save'/>
+            </form>
+        </div>
+      </div>
+    </div>
+   </div>
+  {% endblock %}

@@ -1,0 +1,157 @@
+{% extends 'Navbar1.html' %}
+{% block Navcontent %}
+
+
+
+<!-- printing flassh message upon succesful form submission -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+    <a href="#" class="del-msg">&times;</a>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<!-- setting timeout for the message -->
+<script>
+    $(document).ready(function () {
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000)
+    })
+</script>
+
+<style>
+body {
+  margin: 0;
+ 
+}
+
+.sidebar {
+  margin: 0;
+  top: 17%;
+  width: 250px;
+  background-color: #F5F5F5;
+  position: fixed;
+  height: 100%;
+  z-index: 1;
+  overflow-x: auto;
+  padding-top: 60px;
+  padding-top: 60px;
+  border-bottom: 2px solid #E5E5E5;
+  border-top: 2px solid #E5E5E5;
+  border-right: 2px solid #E5E5E5;
+  border-left: 2px solid #E5E5E5;
+}
+
+.side {
+  margin: 0;
+  padding-top: 4px;
+
+}
+
+.sidebar a {
+  font-size: 14px;
+  display: block;
+  color: #055A87;
+  padding: 8px;
+  text-decoration: none;
+  border-bottom: 1px solid #E5E5E5;
+  border-top: 1px solid #E5E5E5;
+  background: #F5F5F5;
+  padding-left: 30px;
+}
+ 
+.sidebar a.active {
+  background-color: #0B6595;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #0B6595;
+  color: white;
+}
+
+div.content {
+  margin-left: 260px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+
+</style>
+
+<div class="side">
+<div class="sidebar">
+<h5 class="text-center"><b>Wards </b></h5>
+  <a href="{% url 'ward' %}">Male Acute Ward</a>
+  <a href="{% url 'FAward' %}">Female Acute Ward</a>
+ <a href="{% url 'MRward' %}">Male Rehabilitation Ward</a>
+  <a href="{% url 'FRward' %}">Female Rehabilitation Ward</a>
+  <a href="{% url 'Pward' %}"> Paying Ward</a> 
+</div>
+</div>
+
+
+
+
+<div class="content">
+<br/>
+<div class = "wards">
+<!-- displaying data entry for form for patients -->
+<div class="container" style="margin-top: 50px;" ,>
+<div class="row row-cols-1 row-cols-md-2">
+  <div class="col mb-4">
+    <div class="card">
+      <a href=" #"> 
+        <div class="card-header"><b>Paying Ward (Todays total  number of patients is {{count}})</b></div></a>
+            <div class="card-body"> 
+                <table class="table table-hover" id="wards">
+                    <thead>
+                        <tr>
+                            <th>Patient Name </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for a in payward %}
+                            <tr>
+                                <td>{{a.patient_name}}</td>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+    {% block content %}
+    {% load static %}
+
+    <style>
+        .login {
+            padding-top: 150px;
+            padding-left: 450px;
+            padding-right: 450px;
+            padding-bottom: 60px;
+           
+            
+        }
+        .card-header {
+            background-color: #055A87;
+            color: white;
+
+        }
+
+
+    </style>
+        {% load crispy_forms_tags%}
+            <div class="login">
+            <div class="col mb-4">
+            <div class="card">
+            <center>
+            <div class="card-header"><b><h2>Mental Health Information Sytem</h2></b><br/>
+            <!-- <img src ="{% static 'images/logo.png' %}"  width = "170"  height = "160"  > -->
+            </div>
+            </center>
+            <div class="card-body">
+            <form method="POST">
+                {%csrf_token %}
+                {{form|crispy}}
+
+            <div class="form-group">
+            <button class="btn btn-primary btn-lg float-right" type="submit">Log in</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>     
+{% endblock %} 

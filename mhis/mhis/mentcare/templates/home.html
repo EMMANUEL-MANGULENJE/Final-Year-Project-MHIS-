@@ -1,0 +1,189 @@
+{% extends 'Navbar1.html' %}
+
+{% block Navcontent %} 
+{% load static %} 
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class = "alert alert-{{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+<style>
+body {
+  margin: 0;
+ 
+}
+
+.sidebar {
+  margin: 0;
+  top: 17%;
+  width: 250px;
+  background-color: #F5F5F5;
+  position: fixed;
+  height: 100%;
+  z-index: 1;
+  overflow-x: auto;
+  padding-top: 60px;
+  padding-top: 60px;
+  border-bottom: 2px solid #E5E5E5;
+  border-top: 2px solid #E5E5E5;
+  border-right: 2px solid #E5E5E5;
+  border-left: 2px solid #E5E5E5;
+}
+
+.side {
+  margin: 0;
+  padding-top: 4px;
+
+}
+
+.sidebar a {
+  font-size: 14px;
+  display: block;
+  color: #055A87;
+  padding: 8px;
+  text-decoration: none;
+  border-bottom: 1px solid #E5E5E5;
+  border-top: 1px solid #E5E5E5;
+  background: #F5F5F5;
+  padding-left: 30px;
+}
+ 
+.sidebar a.active {
+  background-color: #0B6595;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #0B6595;
+  color: white;
+}
+
+div.content {
+  margin-left: 260px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+</style>
+
+<div class="side">
+<div class="sidebar">
+<h5 class="text-center"><b>Quick Links </b></h5>
+  <a href="{% url 'PatientAdd' %}">New Patient</a>
+  <a  href="{% url 'MakeAppointment' %}">New Appointments</a>
+  <a href="{% url 'Prescription' %}">Add Prescription</a>
+  <a href="{% url 'Rdetail' %}">View Reports</a>
+  <a href="{% url 'Diagnosis' %}">Diagnosis</a>
+  <a href="{% url 'prescriptionDetails' %}"> Prescription</a>
+  <a href="{% url 'HistoryDetail' %}">Patient History</a>
+  <a href="{% url 'Reports' %}">Add Report</a>
+  <a href="{% url 'dischargeDetails' %}">Discharged Patients</a>
+
+  <h5 class="text-center"><b>Notes</b></h5>
+  <a href="{% url 'doctorDetails' %}">📔 Doctors Notes</a>
+  <a href="{% url 'nurseDetails' %}">📓 Nurses Notes</a>
+  
+  
+</div>
+</div>
+
+<div class="content">
+<br/>
+<div class = "wards">
+<div class="row row-cols-1 row-cols-md-2">
+  <div class="col mb-4">
+    <div class="card">
+      <a href="{% url 'patientDetail' %}"> <div class="card-header"><b>Patients</b></div>
+      <div class="card-body">
+        <img src ="{% static 'images/patient.jpg' %}" height = "160" ></a>
+      
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="col mb-4">
+    <div class="card">
+      <a href="{% url 'prescriptionDetails' %}"> <div class="card-header"><b>Prescriptions</b></div>
+      <div class="card-body">
+        <img src ="{% static 'images/prescription.png' %}" width = "160"  height = "160"></a>
+  </div>
+    </div>
+  </div>
+
+
+
+  <div class="col mb-4">
+    <div class="card">
+      <a href="{% url 'diagnosisDetails' %}"> <div class="card-header"><b>Diagnosis</b></div>
+      <div class="card-body">
+       <img src ="{% static 'images/stetho.jpg' %}" width = "160"  height = "160"></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="row row-cols-1 row-cols-md-2">
+  <div class="col mb-4">
+    <div class="card">
+       <a href="{% url 'ward' %}"> <div class="card-header"><b>Wards</b></div>
+      <div class="card-body">
+         <img src ="{% static 'images/ward.jpg' %}" width = "160"  height = "160"></a>
+      </div>   
+    </div>
+  </div>
+
+
+
+
+  <div class="col mb-4">
+    <div class="card">
+       <a href="{% url 'appointmentDetails' %}"> <div class="card-header"><b>Appointments</b></div>
+      <div class="card-body">
+        <img src ="{% static 'images/appointment.jpg' %}" width = "160"  height = "160"></a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col mb-4">
+    <div class="card">
+      <a href="{% url 'Rdetail' %}"> <div class="card-header"><b>Reports</b></div>
+      <div class="card-body">
+         <img src ="{% static 'images/report.png' %}" height = "160"></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+ 
+    {% endblock %}

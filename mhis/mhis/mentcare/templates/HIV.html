@@ -1,0 +1,145 @@
+ {% extends 'Navbar1.html' %}
+
+{% block Navcontent %}  
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class = "alert alert-{{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+<style>
+body {
+  margin: 0;
+ 
+}
+
+.sidebar {
+  margin: 0;
+  top: 18%;
+  width: 250px;
+  background-color: #F5F5F5;
+  position: fixed;
+  height: 100%;
+  z-index: 1;
+  left: 0;
+  overflow-x: auto;
+  padding-top: 71px;
+}
+
+.side {
+  margin: 0;
+  padding-top: 0px;
+
+}
+
+.sidebar a {
+  font-size: 14px;
+  display: block;
+  color: #055A87;
+  padding: 8px;
+  text-decoration: none;
+  border-bottom: 1px solid #E5E5E5;
+  border-top: 1px solid #E5E5E5;
+  background: #F5F5F5;
+  padding-left: 30px;
+}
+ 
+.sidebar a.active {
+  background-color: #0B6595;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #0B6595;
+  color: white;
+}
+
+div.content {
+  margin-left: 260px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+
+<div class="side">
+<div class="sidebar">
+  <a  href="{% url 'PatientAdd' %}">Patient Personal Data</a>
+  <a href="{% url 'MedicalPsychiatricHistory' %}">Medical/Pyschiatric History</a>
+  <a href="{% url 'Diagnosis' %}">Diagnoses</a>
+  <a href="{% url 'Prescription' %}">Prescriptions</a>
+  <a href="{% url 'HIVSeroStatus' %}">HIV Sero status</a>
+  <a href="{% url 'Discharge' %}">Exit Details</a>
+</div>
+</div>
+
+<div class="content">
+
+     {% load crispy_forms_tags%}
+<br/>
+<br/>
+<h1 class="text-center">Patient HIV Sero Status</h1>
+<br>
+<br>
+    <!-- Patient HIV  entry form            -->
+   <form method = 'POST' action = ''>
+    {% csrf_token%}
+
+     <div class="form-row">
+      <div class="form-group col-md-3 mb-0">
+        {{form.patient_name|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+        {{form.HIV_sero_status|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+        {{form.if_reactive_when_was_tested|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+        {{form.if_reactive_is_on_HAART|as_crispy_field}}
+      </div>
+        <div class="form-group col-md-3 mb-0">
+        {{form.indication_for_HAART|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+        {{form.how_long_on_HAART|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+        {{form.if_on_HAART_when_initiated|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+        {{form.if_on_HAART_what_is_regime|as_crispy_field}}
+      </div>
+    </div>
+
+                
+    
+    <input type = "submit" class="btn btn-primary" value= 'save'/>
+    </form>
+</div>
+
+
+
+
+ 
+    {% endblock %}

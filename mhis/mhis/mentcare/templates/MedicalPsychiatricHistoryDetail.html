@@ -1,0 +1,89 @@
+{% extends 'Navbar1.html' %}
+{% block Navcontent %}
+
+
+
+<!-- printing flassh message upon succesful form submission -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+    <a href="#" class="del-msg">&times;</a>
+</div>
+{% endfor %}
+{% endif %}
+
+
+
+<!-- setting timeout for the message -->
+<script>
+    $(document).ready(function () {
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000)
+    })
+</script>
+
+
+<!-- displaying data entry for form for patients -->
+<div class="container" style="margin-top: 50px;" ,>
+    <h1 class="text-center">Patients Medical/Psychiatric History</h1>
+    <br/>
+
+    <table class="table table-hover" id="patient">
+        <thead>
+            <tr>
+                <th>Patient Name </th>
+                <th>Reffering Institution</th>
+                <th>Region Reffered from</th>
+                <th>Refferal Mode</th>
+                <th>Previous Hospital</th>
+                <th>Mental History</th>
+                <th>Epilepsy History</th>
+                <th>OPD Review Date</th>
+                <th>OPD Review exit</th>
+                <th>No of Admissions</th>
+                <th>Exit Ward Type</th>
+                <th>No of Abscondements</th>
+                <th>Transfer</th>
+               
+                <th>Update</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+
+
+        <tbody>
+            {% for a in history %}
+            <tr> 
+                <td>{{a.patient_name}}</td>
+                <td>{{a.referring_institution}}</td>
+                <td>{{a.region_reffered_from}}</td>
+                <td>{{a.mode_of_refferal}}</td>
+                <td>{{a.last_time_treated_at}}</td>
+                <td>{{a.history_of_mental_illness_in_family}}</td>
+                <td>{{a.history_of_epilepsy}}</td>
+                <td>{{a.date_of_OPD_review}}</td>
+                <td>{{a.type_of_OPD_exit}}</td>
+                <td>{{a.number_of_addmission}}</td>
+                <td>{{a.type_of_ward_exit}}</td>
+                <td>{{a.number_of_abscond}}</td>
+                <td>{{a.if_transferred_where}}</td>
+                
+                
+                <td><a href="{% url 'update_DoctorNotes' a.id %}" class="btn btn-primary">update</a></td>
+                <td><a href="{% url 'delete_DoctorNotes' a.id %}"
+                        onclick="return confirm('Are You sure you want to delete?')" class="btn btn-danger">Delete</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+{% endblock %}
