@@ -29,17 +29,18 @@
 
 
 <!-- displaying data entry for form for patients -->
-<div class="container" style="margin-top: 50px;", >
+<div class="container" style="margin-top: 20px;", >
     <h1 class="text-center">Wards General Notes</h1>
    
 
 
-    <table class="table table-hover" id="report">
+    <table class="ui celled table" id="report" style="width:100%">
         <thead>
             <tr>
                 <th>Ward Name</th>
                 <th>General Notes </th>
-                
+                <th>Update </th>
+                <th>Delete</th>
             </tr>
         </thead>
 
@@ -49,6 +50,8 @@
             <tr>
                 <td>{{p.ward_name}}</td>
                 <td>{{p.General_Report}}</td>
+                <td><a href="{% url 'update_Reports' p.id %}"  class="btn btn-primary">update</a></td>
+                <td><a href="{% url 'delete_Reports' p.id %}" onclick="return confirm('Are You sure you want to delete?')" class="btn btn-danger">Delete</a></td>
                 
             </tr>
             {% endfor %}

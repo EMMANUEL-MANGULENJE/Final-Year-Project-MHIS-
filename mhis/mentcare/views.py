@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
-from.forms import *
+from .decorators import *
+from .forms import *
 from .models import * 
 
 
@@ -21,6 +22,7 @@ def main(request):
 
 #nurse data entry form function
 @login_required
+@allowed_user(allowed_roles = ['NURSES'])
 def NurseNotes(request):
     form = NurseNotesForm(request.POST or None)
     if form.is_valid():
@@ -41,6 +43,7 @@ def NurseDetail(request):
     return render(request, 'NurseDetail.html', context)
 
 #delete nurses notes
+@allowed_user(allowed_roles = ['NURSES'])
 @login_required
 def DeleteNnotes(request, pid):
     note = NurseNote.objects.get(id=pid)
@@ -48,6 +51,7 @@ def DeleteNnotes(request, pid):
     return redirect('nurseDetails')
 
 #notes updating function
+@allowed_user(allowed_roles = ['NURSES'])
 @login_required
 def NnotesUpdate(request, pk):
     note = NurseNote.objects.get(id=pk) 
@@ -69,6 +73,7 @@ def NnotesUpdate(request, pk):
 
 #doctor data entry form function
 @login_required
+@allowed_user(allowed_roles = ['DOCTORS'])
 def DoctorNotes(request):
     form = DoctorNotesForm(request.POST or None)
     if form.is_valid():
@@ -88,6 +93,7 @@ def DoctorDetail(request):
 
 
 @login_required
+@allowed_user(allowed_roles = ['DOCTORS'])
 def DeleteDnotes(request, pid):
     notes = DoctorNote.objects.get(id=pid)
     notes.delete()
@@ -96,6 +102,7 @@ def DeleteDnotes(request, pid):
 
 #patient updating function
 @login_required
+@allowed_user(allowed_roles = ['DOCTORS'])
 def DNotesUpdate(request, pk):
     notes = DoctorNote.objects.get(id=pk) 
     form = DoctorNotesForm(instance = notes)
@@ -116,6 +123,7 @@ def DNotesUpdate(request, pk):
 
 #add patient into the system function
 @login_required
+@allowed_user(allowed_roles = ['RECORDS'])
 def PatientAdd(request):
     form = PatientAddForm(request.POST or None)
     if form.is_valid():
@@ -138,6 +146,7 @@ def patientDetail(request):
 
 #delete patient function
 @login_required
+@allowed_user(allowed_roles = ['Records'])
 def DeletePatient(request, pid):
     patients = Patient.objects.get(id=pid)
     patients.delete()
@@ -146,6 +155,7 @@ def DeletePatient(request, pid):
 
 #patient updating function
 @login_required
+@allowed_user(allowed_roles = ['Records'])
 def PatientUpdate(request, pk):
     patient = Patient.objects.get(id=pk) 
     form = PatientAddForm(instance = patient)
@@ -164,6 +174,7 @@ def PatientUpdate(request, pk):
 
 #patient discharge functions
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def Discharge(request):
     form = DischargeForm(request.POST or None)
     if form.is_valid():
@@ -184,6 +195,7 @@ def DischargeDetail(request):
 
 
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def DeleteDischarge(request, pid):
     discharge = Exit.objects.get(id=pid)
     discharge.delete()
@@ -191,6 +203,7 @@ def DeleteDischarge(request, pid):
 
 
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def DischargeUpdate(request, pk):
     discharge = Exit.objects.get(id=pk)
     form = DischargeForm(instance=discharge)
@@ -254,6 +267,7 @@ def AppointmentUpdate(request, pk):
 
 #HIV patient status form
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def HIVSeroStatus(request):
     form = HIVStatusForm(request.POST or None)
     if form.is_valid():
@@ -270,6 +284,7 @@ def HIVSeroStatus(request):
 
 #diagnosis entry form
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def Diagnosis(request):
     form = DiagnosisForm(request.POST or None)
     if form.is_valid():
@@ -290,12 +305,14 @@ def DiagnosisDetail(request):
 
 
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def DeleteDiagnosis(request, pid):
     diagnosis = Diagnoses.objects.get(id=pid)
     diagnosis.delete()
     return redirect('diagnosisDetails')
 
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def DiagnosisUpdate(request, pk):
     diagnosis = Diagnoses.objects.get(id=pk)
     form = DiagnosisForm(instance=diagnosis)
@@ -337,6 +354,7 @@ def HistoryDetail(request):
 
 #prescription form function
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def Prescription(request):
     form = PrescriptionForm(request.POST or None)
     if form.is_valid():
@@ -358,12 +376,14 @@ def prescriptionDetails(request):
 
 
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def DeletePrescription(request, pid):
     prescription = Prescriptions.objects.get(id=pid)
     prescription.delete()
     return redirect('prescriptionDetails')
 
 @login_required
+@allowed_user(allowed_roles = ['Doctors, Nurses'])
 def PrescriptionUpdate(request, pk):
     prescription = Prescriptions.objects.get(id=pk)
     form = PrescriptionForm(instance=prescription)
@@ -406,7 +426,18 @@ def logout(request):
     return render(request, 'logout.html')
 
 
+def reset_password(request):
+    return render(request, )
+
+def confirm(request):
+    return render(request, )
+
+
+
+"""report functions. adding report, displaying report, 
+    updating report and deleting report"""
 @login_required
+@allowed_user(allowed_roles = ['Night Super'])
 def Reports(request):
     form = ReportsForm(request.POST or None)
     if form.is_valid():
@@ -425,6 +456,31 @@ def Rdetail(request):
     return render(request, 'ReportsDetail.html', context)
 
 
+@login_required
+@allowed_user(allowed_roles = ['Night Super'])
+def DeleteReports(request, pid):
+    reports = Report.objects.get(id=pid)
+    reports.delete()
+    return redirect('Rdetail')
+
+@login_required
+@allowed_user(allowed_roles = ['DOCTORS'])
+def ReportsUpdate(request, pk):
+    reports = Report.objects.get(id=pk)
+    form = ReportsForm(instance=reports)
+    if request.method == 'POST':
+        form = ReportsForm(request.POST, instance=reports)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Report successfully updated')
+            return redirect('Rdetail')
+    context = {
+        "form": form,
+    }
+    return render(request, 'Reports.html', context)
+
+
+
  
 """wards functions, ward = male acute ward, MRward = Male Rehabilitation ward
 FAward = Female Acute award, FRward = Female rrehabilitation ward
@@ -432,30 +488,34 @@ Pward = Paying ward"""
 @login_required
 def ward(request):
     patientward = Male_Acute_Ward.objects.all()
+    count =  Male_Acute_Ward.objects.count()#funcrion to count all patients in the ward
     context = {'patientward': patientward}
-    return render(request, 'Wards.html', context)
+    return render(request, 'Wards.html', {"patientward":patientward, "count": count})
 
 @login_required
 def MRward(request):
     maleward = Male_Rehabilitation_Ward.objects.all()
+    count =  Male_Rehabilitation_Ward.objects.count()#funcrion to count all patients in the ward
     context = {'maleward': maleward}
-    return render(request, 'MRward.html', context)
+    return render(request, 'MRward.html', {"maleward":maleward, "count": count})
 
 @login_required
 def FRward(request):
     femaleward = Female_Rehabilitation_Ward.objects.all()
+    count =  Female_Rehabilitation_Ward.objects.count()#funcrion to count all patients in the ward
     context = {'femaleward': femaleward}
-    return render(request, 'FRward.html', context)
+    return render(request, 'FRward.html', {"femaleward":femaleward, "count": count})
 
 @login_required
 def FAward(request):
     femaleAward = Female_Acute_Ward.objects.all()
+    count =  Female_Acute_Ward.objects.count()#funcrion to count all patients in the ward
     context = {'femaleAward': femaleAward}
-    return render(request, 'FAward.html', context)
+    return render(request, 'FAward.html', {"femaleAward":femaleAward, "count": count})
 
 @login_required
 def Pward(request):
     payward = Paying_Ward.objects.all()
-    count =  Paying_Ward.objects.count()
+    count =  Paying_Ward.objects.count()#funcrion to count all patients in the ward
     context = {'payward': payward}
     return render(request, 'Pward.html', {"payward":payward, "count": count})

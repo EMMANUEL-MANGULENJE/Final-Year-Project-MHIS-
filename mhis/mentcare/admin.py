@@ -42,14 +42,14 @@ admin.site.register(Region)
 admin.site.register(HIVStatus)
 admin.site.register(HAARTIndication)
 admin.site.register(HAARTDuration)
-admin.site.register( HAARTRegime) 
-admin.site.register( PsychiatricDiagnosis) 
-admin.site.register( MedicalDiagnosis) 
+admin.site.register(HAARTRegime) 
+admin.site.register(PsychiatricDiagnosis) 
+admin.site.register(MedicalDiagnosis) 
 admin.site.register(Prescriptions)
 admin.site.register(Report)
 
 
 #Admin page customizaation
-admin.site.site_header = "Welcome to Mental Health Information System Admin Portal"
+admin.site.site_header = "Mental Health Information System Admin "
 admin.site.site_title = "Welcome to Mental Health info System"
 admin.site.index_title = "Mental Health Information System Adminstrator"

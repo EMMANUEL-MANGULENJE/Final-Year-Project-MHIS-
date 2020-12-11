@@ -18,6 +18,7 @@ from django.urls import path
 from mentcare.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 
 #url patterns
@@ -43,9 +44,11 @@ urlpatterns = [
 
 
     #General Reports
-    
     path('Reports/', Reports, name = 'Reports'),
     path('Rdetail/', Rdetail, name = 'Rdetail'),
+    path('update_Reports(?p<int:pk>)', ReportsUpdate, name='update_Reports'),
+    path('delete_Reports(?p<int:pid>)', DeleteReports, name='delete_Reports'),
+    
 
 
     #diagnosis urls
@@ -97,5 +100,12 @@ urlpatterns = [
     #logout in and logout urls
     path('', auth_views.LoginView.as_view(template_name='login.html'), name='login'),#login route
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),#logout route
+    
+    
+    #password reset urls
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name = 'password_reset.html'), name = "reset_password"),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name ="password_reset_done"),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name = 'password_reset_form.html'), name = "confirm"),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name = "password_reset_complete"),
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

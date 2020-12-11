@@ -133,5 +133,33 @@ $(document).ready(function() {
 </script>
 
 
+<!-- script for the following tables
+1. prescription
+2. doctor notes details
+3. nurses notes details -->
+<script>
+$(document).ready(function() {
+    $('#prescription').DataTable( {
+        dom: 'Bfrtip',
+ buttons: [
+
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1,]
+                }
+            },
+            'colvis'
+        ]
+    } );
+} );
+</script>
+
      </body>
 </html>

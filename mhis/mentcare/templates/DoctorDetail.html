@@ -2,7 +2,6 @@
 {% block Navcontent %}
 
 
-
 <!-- printing flassh message upon succesful form submission -->
 {% if messages %}
 {% for message in messages %}
@@ -33,13 +32,11 @@
 
 
 
-    <table class="table table-hover" id="patient">
+    <table class="table table-hover" id="prescription">
         <thead>
             <tr>
-                <th>Diagnosis ID</th>
                 <th>Patient Name </th>
                 <th>Doctor Name</th>
-               
                 <th>Update</th>
                 <th>Delete</th>
 
@@ -50,7 +47,6 @@
         <tbody>
             {% for a in doctors %}
             <tr>
-                <td>{{a.id}}</td>
                 <td>{{a.patient_name}}</td>
                 <td>{{a.Doctor_notes}}</td>
                 
